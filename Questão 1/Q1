@@ -1,0 +1,71 @@
+import streamlit as st
+import pandas as pd
+from datetime import datetime
+
+# Configuração da Página
+st.set_page_config(page_title="Gestão de Conta de Luz", layout="wide")
+
+# Simulação de Banco de Dados (Session State do Streamlit)
+if 'contas' not in st.session_state:
+    st.session_state.contas = []
+
+# --- Título ---
+st.title("⚡ Sistema de Acompanhamento de Gasto de Luz")
+st.markdown("---")
+
+# --- Sidebar para Cadastro (Caso de Uso: CADASTRAR CONTAS) ---
+st.sidebar.header("Cadastrar Nova Conta")
+with st.sidebar.form("form_cadastro"):
+    data_leitura = st.date_input("Data da Leitura")
+    n_leitura = st.number_input("Nº da Leitura", min_value=0, step=1)
+    kw_gasto = st.number_input("KW Gasto no Mês", min_value=0.0, step=0.1)
+    valor_pagar = st.number_input("Valor a Pagar (R$)", min_value=0.0, step=0.01)
+    data_pagamento = st.date_input("Data do Pagamento")
+    
+    # Cálculo automático conforme regra implícita (Ex: média baseada em 30 dias)
+    media_consumo = kw_gasto / 30 if kw_gasto > 0 else 0.0
+    
+    submit = st.form_submit_button("Cadastrar Conta")
+
+if submit:
+    nova_conta = {
+        "Data Leitura": data_leitura,
+        "Nº Leitura": n_leitura,
+        "Gasto (KW)": kw_gasto,
+        "Valor (R$)": valor_pagar,
+        "Data Pagamento": data_pagamento,
+        "Média Consumo": round(media_consumo, 2)
+    }
+    st.session_state.contas.append(nova_conta)
+    st.sidebar.success("Conta cadastrada com sucesso!")
+
+# --- Área Principal (Caso de Uso: CONSULTAR CONTAS) ---
+if st.session_state.contas:
+    df = pd.DataFrame(st.session_state.contas)
+    
+    st.subheader("📋 Lista de Contas Cadastradas")
+    st.dataframe(df, use_container_width=True)
+
+    # --- Estatísticas (Casos de Uso: VERIFICAR MENOR/MAIOR CONSUMO) ---
+    st.markdown("---")
+    st.subheader("📊 Análise de Consumo")
+    
+    col1, col2 = st.columns(2)
+
+    # Lógica para Maior Consumo
+    maior_row = df.loc[df['Gasto (KW)'].idxmax()]
+    with col1:
+        st.metric(label="📈 Maior Consumo", value=f"{maior_row['Gasto (KW)']} KW")
+        st.caption(f"Mês referente: {maior_row['Data Leitura'].strftime('%m/%Y')}")
+
+    # Lógica para Menor Consumo
+    menor_row = df.loc[df['Gasto (KW)'].idxmin()]
+    with col2:
+        st.metric(label="📉 Menor Consumo", value=f"{menor_row['Gasto (KW)']} KW")
+        st.caption(f"Mês referente: {menor_row['Data Leitura'].strftime('%m/%Y')}")
+
+    # Gráfico de Evolução (Valor Agregado)
+    st.line_chart(df.set_index('Data Leitura')['Gasto (KW)'])
+
+else:
+    st.info("Nenhuma conta cadastrada ainda. Utilize o menu lateral para começar.")

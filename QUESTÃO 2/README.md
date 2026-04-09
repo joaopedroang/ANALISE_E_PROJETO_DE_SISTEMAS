@@ -20,8 +20,8 @@ Para fixação do conceito de classes, criação da classe TextoSaída proposta 
 * **[RNF03]** Restrição de domínio para cores e componentes específicos.
 
 ## 4. Diagramas UML
-[Diagrama de classes](<img width="311" height="226" alt="ClassDiagram" src="https://github.com/user-attachments/assets/4f4a2b1b-223f-4a38-a4bb-99fa132086a2" />)
+[Diagrama de classes] (<img width="311" height="226" alt="ClassDiagram" src="https://github.com/user-attachments/assets/4f4a2b1b-223f-4a38-a4bb-99fa132086a2" />)
 
-[Diagrama de caso de uso](<img width="570" height="370" alt="UseCaseDiagram" src="https://github.com/user-attachments/assets/2874fa44-1a6c-4667-801f-7112b7d5ec95" />
+[Diagrama de caso de uso] (<img width="570" height="370" alt="UseCaseDiagram" src="https://github.com/user-attachments/assets/2874fa44-1a6c-4667-801f-7112b7d5ec95" />
 )
 

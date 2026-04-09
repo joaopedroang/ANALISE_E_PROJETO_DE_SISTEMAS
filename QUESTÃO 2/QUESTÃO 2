@@ -1,0 +1,85 @@
+import streamlit as st
+
+# 1. Definição da Classe TextoSaida (conforme seu Diagrama de Classes)
+class TextoSaida:
+    def __init__(self):
+        self.tamFonte = 16
+        self.corFonte = "preto"
+        self.corFundo = "branco"
+        self.comp = "label"
+        self.texto = ""
+
+    def setTamanho(self, tamanho):
+        self.tamFonte = tamanho
+
+    def setCores(self, fonte, fundo):
+        # Validação de Cores (conforme seu Caso de Uso <<include>>)
+        self.corFonte = fonte
+        self.corFundo = fundo
+
+    def setComp(self, tipo):
+        self.comp = tipo
+
+    def exibir(self):
+        # Dicionário de tradução de cores para CSS
+        cores_map = {
+            "preto": "black", "branco": "white", 
+            "azul": "blue", "amarelo": "yellow", "cinza": "gray"
+        }
+        
+        c_fonte = cores_map.get(self.corFonte, "black")
+        c_fundo = cores_map.get(self.corFundo, "white")
+        
+        # Estilização CSS baseada nos atributos da classe
+        estilo = f"""
+            <style>
+                .saida-texto {{
+                    font-size: {self.tamFonte}px;
+                    color: {c_fonte};
+                    background-color: {c_fundo};
+                    padding: 10px;
+                    border-radius: 5px;
+                    border: 1px solid #ccc;
+                }}
+            </style>
+        """
+        st.markdown(estilo, unsafe_allow_html=True)
+        
+        # Lógica de exibição por tipo de componente
+        if self.comp == "label":
+            st.markdown(f'<p class="saida-texto">{self.texto}</p>', unsafe_allow_html=True)
+        elif self.comp == "edit":
+            st.text_input("Componente Edit (Simulação)", value=self.texto, disabled=False)
+        elif self.comp == "memo":
+            st.text_area("Componente Memo (Simulação)", value=self.texto, height=100)
+
+# 2. Interface Streamlit (Casos de Uso)
+st.title("Configurador de TextoSaída")
+st.sidebar.header("Configurações (UC1 e UC2)")
+
+if 'gerenciador' not in st.session_state:
+    st.session_state.gerenciador = TextoSaida()
+
+obj = st.session_state.gerenciador
+
+# UC1: Configurar Formatação
+obj.texto = st.text_input("Digite o conteúdo do texto:", "Olá, Professor Ricardo!")
+tamanho = st.sidebar.slider("Tamanho da Fonte", 10, 72, 20)
+cor_f = st.sidebar.selectbox("Cor da Fonte", ["preto", "branco", "azul", "amarelo", "cinza"])
+cor_b = st.sidebar.selectbox("Cor do Fundo", ["branco", "preto", "azul", "amarelo", "cinza"])
+
+obj.setTamanho(tamanho)
+obj.setCores(cor_f, cor_b)
+
+# UC2: Selecionar Tipo de Componente
+tipo = st.sidebar.radio("Tipo de Componente", ["label", "edit", "memo"])
+obj.setComp(tipo)
+
+st.divider()
+
+# UC3: Exibir Texto Formatado
+st.subheader("Resultado da Exibição:")
+if obj.texto:
+    obj.exibir()
+else:
+    st.warning("Por favor, defina um conteúdo para o texto.")

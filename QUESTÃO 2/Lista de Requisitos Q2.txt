@@ -1,0 +1,25 @@
+Lista de Requisitos: Cenário Classe TextoSaída
+
+1. Requisitos Funcionais (RF)
+Estes requisitos descrevem as funcionalidades diretas solicitadas no cenário:
+
+RF01 - Configurar Formatação: O sistema deve permitir a configuração do texto por meio de atributos (tamanho da letra, cor da fonte e cor do fundo).
+
+RF02 - Selecionar Componente: O sistema deve permitir a escolha de qual tipo de componente o texto deve ser exibido (entre as opções: label, edit e memo).
+
+RF03 - Validar Cores: O sistema deve restringir a escolha de cores apenas aos tons: preto, branco, azul, amarelo ou cinza.
+
+RF04 - Definir Conteúdo: O sistema deve permitir a inserção do texto que será processado pela classe.
+
+RF05 - Renderizar Saída: O sistema deve exibir o texto final aplicando as formatações e o componente de interface selecionado.
+
+2. Requisitos Não Funcionais (RNF)
+Estes requisitos referem-se a restrições técnicas ou qualidades do sistema:
+
+RNF01 - Independência de Linguagem: A classe não deve possuir vínculo (herança) com classes visuais de linguagens de programação específicas.
+
+RNF02 - Usabilidade: A interface deve permitir a troca dinâmica entre os tipos de componentes (label, edit e memo) para visualização imediata.
+
+RNF03 - Portabilidade: O código deve ser implementado em Python com Streamlit para garantir o acesso via ambiente web.
+
+RNF04 - Encapsulamento: Os atributos da classe devem ser manipulados através de métodos, seguindo as boas práticas de Orientação a Objetos.

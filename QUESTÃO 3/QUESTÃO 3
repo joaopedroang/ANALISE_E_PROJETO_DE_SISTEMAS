@@ -1,0 +1,101 @@
+import streamlit as st
+
+# --- CLASSE BONECO (POO - RNF02) ---
+class Boneco:
+    def __init__(self, nome, x=0, y=0, direcao="Direita"):
+        self.nome = nome
+        self.posicaoX = x
+        self.posicaoY = y
+        self.direcao = direcao
+
+    def mudarDirecao(self, nova_direcao):
+        """RF03 - Alterar direção"""
+        self.direcao = nova_direcao
+
+    def mover(self):
+        """RF04 e RF05 - Movimentação e Atualização de Posição"""
+        if self.direcao == "Cima":
+            self.posicaoY += 1
+        elif self.direcao == "Baixo":
+            self.posicaoY -= 1
+        elif self.direcao == "Esquerda":
+            self.posicaoX -= 1
+        elif self.direcao == "Direita":
+            self.posicaoX += 1
+
+    def getPosicao(self):
+        """RF06 - Exibir posição"""
+        return f"({self.posicaoX}, {self.posicaoY})"
+
+    def exibirStatus(self):
+        """RF07 - Exibir nome, posição e direção"""
+        return {
+            "Nome": self.nome,
+            "Posição": self.getPosicao(),
+            "Direção": self.direcao
+        }
+
+# --- INTERFACE STREAMLIT ---
+def main():
+    st.set_page_config(page_title="Sistema Boneco em Movimento", layout="centered")
+    st.title("🏃 Boneco em Movimento")
+    st.divider()
+
+    # RF01 - Criar Boneco (Inicialização do Estado)
+    if 'boneco' not in st.session_state:
+        st.subheader("Configuração Inicial")
+        nome_init = st.text_input("Nome do Boneco:", placeholder="Ex: Robô")
+        col1, col2 = st.columns(2)
+        x_init = col1.number_input("X Inicial:", value=0)
+        y_init = col2.number_input("Y Inicial:", value=0)
+        
+        if st.button("Criar Boneco"):
+            if nome_init:
+                st.session_state.boneco = Boneco(nome_init, x_init, y_init)
+                st.rerun()
+            else:
+                st.error("Por favor, insira um nome.")
+        return
+
+    # Se o boneco já existe, acessamos o objeto
+    obj = st.session_state.boneco
+
+    # Layout em colunas: Controles e Status
+    col_ctrl, col_status = st.columns([1, 1])
+
+    with col_ctrl:
+        st.subheader("Controles")
+        
+        # RF03 - Alterar Direção
+        nova_dir = st.selectbox(
+            "Mudar Direção:", 
+            ["Cima", "Baixo", "Esquerda", "Direita"],
+            index=["Cima", "Baixo", "Esquerda", "Direita"].index(obj.direcao)
+        )
+        if nova_dir != obj.direcao:
+            obj.mudarDirecao(nova_dir)
+
+        # RF04/RF05 - Mover
+        if st.button("Mover 1 passo", use_container_width=True):
+            obj.mover()
+            st.toast(f"{obj.nome} moveu para {obj.direcao}!")
+
+    with col_status:
+        st.subheader("Status Atual (RF07)")
+        status = obj.exibirStatus()
+        st.info(f"**Nome:** {status['Nome']}")
+        st.success(f"**Posição:** {status['Posição']}")
+        st.warning(f"**Direção:** {status['Direção']}")
+
+    # Representação Visual Simples
+    st.divider()
+    st.subheader("Visualização no Plano")
+    # Pequeno feedback visual da posição
+    st.write(f"O boneco está em X:{obj.posicaoX} e Y:{obj.posicaoY}")
+    
+    if st.button("Resetar Sistema"):
+        del st.session_state.boneco
+        st.rerun()
+
+if __name__ == "__main__":
+    main()

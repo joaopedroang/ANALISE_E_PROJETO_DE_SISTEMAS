@@ -1,0 +1,17 @@
+Requisitos Funcionais (RF):
+
+RF01 O sistema deve permitir criar um boneco com nome e posição inicial.
+RF02 O boneco deve possuir uma direção atual.
+RF03 O sistema deve permitir alterar a direção do boneco.
+RF04 O boneco deve se mover para cima, baixo, esquerda e direita.
+RF05 O sistema deve atualizar a posição do boneco após cada movimento.
+RF06 O sistema deve exibir a posição atual do boneco.
+RF07 O sistema deve exibir nome, posição e direção.
+
+Requisitos Não-Funcionais (RNF):
+
+RNF01 O sistema deve ser simples e de fácil entendimento.
+RNF02 O código deve ser organizado seguindo boas práticas de programação orientada a objetos.
+RNF03 O sistema deve ter boa legibilidade (nomes claros de variáveis e métodos).
+RNF04 O tempo de resposta para movimentação deve ser o menor possível.
+RNF05 O sistema deve permitir fácil manutenção e expansão (ex: adicionar novas direções futuramente).

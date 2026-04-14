@@ -1,0 +1,13 @@
+## Requisitos Funcionais (RF)
+[RF01] O sistema deve permitir o cadastro de gastos com tipo, data, valor e forma de pagamento.
+[RF02] O sistema deve permitir a classificação do gasto (Remédio, Roupa, Refeição, etc).
+[RF03] O sistema deve oferecer opções pré-definidas de formas de pagamento (Dinheiro, Cartão Crédito/Débito, Ticket).
+[RF04] O sistema deve calcular o total de gastos acumulados no mês.
+[RF05] O sistema deve agrupar os gastos por categoria (tipo) ao final do mês.
+[RF06] O sistema deve exibir o subtotal gasto em cada forma de pagamento dentro de cada categoria.
+
+## Requisitos Não-Funcionais (RNF)
+[RNF01] Os dados devem ser organizados de forma a permitir exportação ou visualização similar a uma planilha (Excel).
+[RNF02] O sistema deve garantir a precisão decimal nos cálculos financeiros.
+[RNF03] A interface deve permitir uma inserção rápida de dados (usabilidade).
+[RNF04] O código deve ser modularizado para permitir a adição de novos tipos de gastos ou formas de pagamento futuramente.

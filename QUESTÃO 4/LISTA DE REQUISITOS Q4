@@ -1,0 +1,19 @@
+Aplicativo de controle pessoal de Maurício.
+
+1. REQUISITOS FUNCIONAIS (RF)
+
+RF01 O sistema deve permitir o cadastro de remédios contendo: nome do paciente, nome do remédio, dosagem, data de início, duração (dias) e frequência diária.
+RF02 O sistema deve sugerir automaticamente os horários possíveis com base na quantidade de vezes ao dia informada.
+RF03 O sistema deve permitir que o usuário selecione o horário inicial desejado para a medicação.
+RF04 O sistema deve calcular e exibir a data de término do tratamento automaticamente.
+RF05 O sistema deve gerar uma planilha de horários para todo o período da prescrição.
+RF06 O sistema deve permitir a visualização da planilha de horários específica para o dia atual.
+RF07 O sistema deve permitir a reorganização automática dos horários de um dia caso ocorra um atraso na primeira tomada.
+
+2. REQUISITOS NÃO-FUNCIONAIS (RNF)
+
+RNF01 O sistema deve ser executado em ambiente mobile (Smartphone).
+RNF02 A reorganização de horários deve ser processada em tempo real (baixa latência).
+RNF03 A interface deve ser intuitiva para facilitar o uso por pacientes em tratamento.
+RNF04 O sistema deve garantir a persistência dos dados para que os horários não sejam perdidos ao fechar o app.
+RNF05 O cálculo de horários deve seguir a precisão cronológica (divisão de 24h pela frequência).

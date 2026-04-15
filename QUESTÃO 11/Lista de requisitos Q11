@@ -1,0 +1,20 @@
+## 1. Requisitos Funcionais (RF)
+
+[RF01] Cadastro de Pessoa Base: O sistema deve permitir o registro de dados fundamentais (Nome e Data de Nascimento) que são comuns a todos os indivíduos no sistema.
+[RF02] Especialização de Cliente: O sistema deve permitir o cadastro de informações exclusivas para clientes, como Código único e Limite de Crédito.
+[RF03] Especialização de Funcionário: O sistema deve permitir o registro de dados contratuais para funcionários, incluindo Matrícula, Salário e Data de Admissão.
+[RF04] Gestão de Endereços: O sistema deve permitir que uma pessoa possua um ou mais endereços cadastrados, contendo Logradouro, CEP, Número e Bairro.
+[RF05] Gestão de Contatos Telefônicos: O sistema deve permitir o vínculo de múltiplos números de telefone (DDD e Número) a uma única pessoa.
+[RF06] Vínculo de Profissão: O sistema deve permitir associar um cliente a uma profissão cadastrada no banco de dados.
+[RF07] Vínculo de Cargo: O sistema deve permitir associar um funcionário a um cargo específico disponível na empresa.
+[RF08] Manutenção de Cadastros: O sistema deve permitir a atualização e exclusão de registros de clientes, funcionários, cargos e profissões.
+
+## 2. Requisitos Não Funcionais (RNF)
+
+[RNF01] Integridade de Herança: O sistema deve garantir que nenhum cliente ou funcionário exista sem possuir os dados básicos de uma "Pessoa" associados.
+[RNF02] Unicidade de Identificação: O Código do Cliente e a Matrícula do Funcionário devem ser identificadores únicos e não repetíveis no banco de dados.
+[RNF03] Precisão Financeira: Os atributos de Salário e Limite de Crédito (tipo Float) devem suportar cálculos financeiros com precisão de duas casas decimais.
+[RNF04] Flexibilidade de Endereço/Telefone: O sistema deve suportar a multiplicidade de endereços e telefones por pessoa, sem um limite fixo rígido que prejudique a escalabilidade.
+[RNF05] Padronização de Dados: Datas (Nascimento e Admissão) devem seguir o formato padrão ISO (AAAA-MM-DD) para evitar erros de interpretação cronológica.
+[RNF06] Desempenho de Consulta: O sistema deve ser capaz de recuperar o perfil completo de um funcionário (incluindo cargo, endereço e telefones) em tempo inferior a 1 segundo.
+[RNF07] Disponibilidade: O módulo de cadastro deve estar disponível para operação durante 99% do horário comercial da empresa.
